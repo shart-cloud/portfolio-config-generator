@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket-sweat-beak"
+  bucket = var.site_bucket_name
 
   tags = {
     Name        = "My bucket"
@@ -48,7 +48,7 @@ resource "aws_s3_bucket_website_configuration" "example" {
 
 
 resource "aws_s3_bucket_policy" "site" {
-  bucket = aws_s3_bucket.site.id
+  bucket = aws_s3_bucket.example.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -58,7 +58,7 @@ resource "aws_s3_bucket_policy" "site" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.site.arn}/*"
+        Resource  = "${aws_s3_bucket.example.arn}/*"
       }
     ]
   })
