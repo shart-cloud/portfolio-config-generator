@@ -5,5 +5,5 @@ export default defineConfig({
   plugins: [react()],
   // Use environment variable for base path, default to repo name for GitHub Pages
   // For S3 deployment, set VITE_BASE_URL=/ in your build environment
-  base: process.env.VITE_BASE_URL || '/portfolio-config-generator/',
+  base: '/',
 })

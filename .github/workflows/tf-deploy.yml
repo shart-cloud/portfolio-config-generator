@@ -1,0 +1,76 @@
+name: Terraform Apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type APPLY to confirm"
+        required: true
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Confirm apply
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "APPLY" ]; then
+            echo "Confirmation missing. Type APPLY to continue."
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+
+      - name: Terraform init
+        run: terraform init -input=false
+        working-directory: infra
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve -input=false
+        working-directory: infra
+
+      - name: Read Terraform outputs
+        id: tf
+        run: |
+          echo "site_bucket=$(terraform output -raw site_bucket_name)" >> "$GITHUB_OUTPUT"
+          echo "website_url=$(terraform output -raw website_url)" >> "$GITHUB_OUTPUT"
+        working-directory: infra
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React app
+        run: npm run build
+        env:
+          VITE_BASE_URL: /
+          VITE_PORTFOLIO_MODE: production
+
+      - name: Sync to S3
+        run: aws s3 sync dist "s3://${{ steps.tf.outputs.site_bucket }}" --delete
+
+      - name: Print website URL
+        run: |
+          echo "=========================================="
+          echo "Website deployed successfully!"
+          echo "URL: ${{ steps.tf.outputs.website_url }}"
+          echo "=========================================="
