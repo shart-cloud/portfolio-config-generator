@@ -1,7 +1,7 @@
 import { PortfolioConfig } from '../types/portfolio';
 
-export function serializeConfig(config: PortfolioConfig, hasAvatar: boolean): string {
-  const avatarPath = hasAvatar ? './avatar' : '';
+export function serializeConfig(config: PortfolioConfig, hasAvatar: boolean, avatarExtension: string = 'png'): string {
+  const avatarPath = hasAvatar ? `/avatar.${avatarExtension}` : '';
 
   const configWithAvatar = {
     ...config,
@@ -47,7 +47,7 @@ export function serializeConfig(config: PortfolioConfig, hasAvatar: boolean): st
     return String(value);
   };
 
-  return `import { PortfolioConfig } from './types';
+  return `import { PortfolioConfig } from '../types/portfolio';
 
 export const portfolioConfig: PortfolioConfig = ${formatValue(configWithAvatar)};
 `;

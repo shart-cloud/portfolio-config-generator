@@ -35,13 +35,20 @@ ${Object.entries(theme.variables)
 
 ## Usage
 
-1. Copy \`config.ts\` to your portfolio project
-2. Copy the avatar file to your assets directory
-3. Update the avatar path in \`config.ts\` if needed
-4. Import and use the configuration in your portfolio
+1. Copy \`config.ts\` to \`src/constants/\` in your portfolio fork
+2. Copy the avatar file to the \`public/\` directory
+3. Update \`src/constants/defaultConfig.ts\` to use your config:
 
 \`\`\`typescript
 import { portfolioConfig } from './config';
+
+export const defaultConfig = portfolioConfig;
+\`\`\`
+
+4. Update the avatar path in your config if needed:
+
+\`\`\`typescript
+avatar: '/avatar.png',
 \`\`\`
 
 ## Generated
@@ -108,14 +115,14 @@ export async function exportPortfolio(
   const zip = new JSZip();
 
   const hasAvatar = avatarFile !== null;
-  const configContent = serializeConfig(config, hasAvatar);
+  const avatarExt = avatarFile ? getFileExtension(avatarFile) : 'png';
+  const configContent = serializeConfig(config, hasAvatar, avatarExt);
   zip.file('config.ts', configContent);
 
   zip.file('types.ts', generateTypesFile());
 
   if (avatarFile) {
-    const ext = getFileExtension(avatarFile);
-    zip.file(`avatar.${ext}`, avatarFile);
+    zip.file(`avatar.${avatarExt}`, avatarFile);
   }
 
   const readmeContent = generateReadme(config, themeName);
