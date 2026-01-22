@@ -1,0 +1,45 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.editor-panel {
+  width: 420px;
+  min-width: 320px;
+  background: var(--editor-bg);
+  border-right: 1px solid var(--editor-border);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.preview-panel {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-primary);
+}
+
+@media (max-width: 900px) {
+  .app-main {
+    flex-direction: column;
+  }
+
+  .editor-panel {
+    width: 100%;
+    min-width: unset;
+    max-height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid var(--editor-border);
+  }
+
+  .preview-panel {
+    flex: 1;
+    min-height: 50vh;
+  }
+}

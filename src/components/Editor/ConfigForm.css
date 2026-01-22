@@ -1,0 +1,176 @@
+.config-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.editor-section {
+  background: var(--editor-bg);
+  border-radius: 8px;
+  border: 1px solid var(--editor-border);
+  padding: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.section-header .section-heading {
+  margin-bottom: 0;
+}
+
+.section-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-btn {
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.add-btn:hover {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #e53e3e;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.remove-btn:hover {
+  opacity: 1;
+}
+
+.repeatable-item {
+  position: relative;
+  padding-right: 2rem;
+}
+
+.repeatable-item .remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.repeatable-item.inline {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-right: 0;
+}
+
+.repeatable-item.inline .form-field {
+  flex: 1;
+}
+
+.repeatable-item.inline .remove-btn {
+  position: static;
+  margin-bottom: 0.5rem;
+}
+
+.cta-group {
+  background: var(--editor-input-bg);
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.cta-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cta-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-item,
+.contact-item {
+  background: var(--editor-input-bg);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.project-item-header,
+.contact-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.project-number,
+.contact-number {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-fields,
+.contact-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-links-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (max-width: 500px) {
+  .project-links-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty-message {
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}

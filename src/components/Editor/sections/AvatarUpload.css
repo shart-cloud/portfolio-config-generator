@@ -1,0 +1,81 @@
+.avatar-dropzone {
+  border: 2px dashed var(--editor-input-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--editor-input-bg);
+}
+
+.avatar-dropzone:hover,
+.avatar-dropzone.dragging {
+  border-color: var(--editor-input-focus);
+  background: rgba(49, 130, 206, 0.05);
+}
+
+.avatar-dropzone.has-image {
+  padding: 0.5rem;
+  border-style: solid;
+}
+
+.avatar-input {
+  display: none;
+}
+
+.avatar-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+.avatar-icon {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.avatar-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.avatar-preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-preview-img {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-primary);
+}
+
+.avatar-remove {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e53e3e;
+  color: white;
+  border: 2px solid var(--editor-bg);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.avatar-remove:hover {
+  background: #c53030;
+}

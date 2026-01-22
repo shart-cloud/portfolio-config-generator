@@ -1,0 +1,517 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Default fallbacks */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0f0f0f;
+  --bg-card: #111111;
+  --text-primary: #00ff41;
+  --text-secondary: #00cc33;
+  --text-muted: #008f26;
+  --accent-primary: #00ff41;
+  --accent-secondary: #00cc33;
+  --border-color: #00ff4130;
+  --shadow-color: rgba(0, 255, 65, 0.15);
+  --tag-bg: #00ff4115;
+  --tag-text: #00ff41;
+
+  --font-display: 'VT323', monospace;
+  --font-body: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --editor-bg: #0a0a0a;
+  --editor-border: #00ff4130;
+  --editor-input-bg: #0f0f0f;
+  --editor-input-border: #00ff4140;
+  --editor-input-focus: #00ff41;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--editor-bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+input, textarea, select {
+  font-family: var(--font-mono);
+  font-size: inherit;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   TERMINAL THEME - CRT / Phosphor Green
+   ============================================ */
+
+.theme-terminal {
+  /* Scanline overlay */
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  background-size: 100% 2px;
+}
+
+.theme-terminal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.theme-terminal .hero-name,
+.theme-terminal .section-title,
+.theme-terminal .section-heading {
+  text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+  letter-spacing: 0.05em;
+}
+
+.theme-terminal .cta-primary,
+.theme-terminal .export-btn {
+  box-shadow: 0 0 10px var(--glow-color), inset 0 0 10px rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--accent-primary);
+  text-shadow: 0 0 5px var(--glow-color);
+}
+
+.theme-terminal .cta-primary:hover,
+.theme-terminal .export-btn:hover {
+  box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color), inset 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+.theme-terminal .project-card,
+.theme-terminal .contact-item,
+.theme-terminal .highlight-item {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.05);
+}
+
+.theme-terminal .project-card:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
+  border-color: var(--accent-primary);
+}
+
+.theme-terminal .hero-avatar,
+.theme-terminal .hero-avatar-placeholder {
+  border: 2px solid var(--accent-primary);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.theme-terminal input:focus,
+.theme-terminal textarea:focus,
+.theme-terminal select:focus {
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Blinking cursor effect for inputs */
+.theme-terminal input::placeholder,
+.theme-terminal textarea::placeholder {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.5; }
+}
+
+/* ============================================
+   BLUEPRINT THEME - Technical Drawing
+   ============================================ */
+
+.theme-blueprint {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: -1px -1px;
+}
+
+.theme-blueprint .preview-panel {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+.theme-blueprint .hero-name {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.theme-blueprint .section-title,
+.theme-blueprint .section-heading {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.theme-blueprint .section-title::before,
+.theme-blueprint .section-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.theme-blueprint .project-card {
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+.theme-blueprint .project-card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  padding: 0 4px;
+  background: var(--bg-primary);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.theme-blueprint .project-card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--accent-primary);
+  border-radius: 50%;
+}
+
+.theme-blueprint .cta-primary {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.theme-blueprint .highlight-item {
+  border: 1px dashed var(--border-color);
+  position: relative;
+}
+
+.theme-blueprint .highlight-item::before {
+  content: '+';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-primary);
+  font-size: 0.8rem;
+}
+
+.theme-blueprint .contact-item {
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.theme-blueprint .contact-item::before {
+  content: '>';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  color: var(--accent-primary);
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   PAPER THEME - Vintage Technical Manual
+   ============================================ */
+
+.theme-paper {
+  position: relative;
+}
+
+.theme-paper::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.theme-paper .hero-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.theme-paper .section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.theme-paper .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--accent-primary);
+}
+
+.theme-paper .project-card {
+  border: 1px solid var(--border-color);
+  position: relative;
+  box-shadow: 4px 4px 0 var(--border-color);
+}
+
+.theme-paper .project-card::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid var(--border-color);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.theme-paper .highlight-item {
+  border: 1px solid var(--border-color);
+  position: relative;
+  font-family: var(--font-mono);
+}
+
+.theme-paper .highlight-item::before {
+  content: '\2713';
+  margin-right: 0.5rem;
+  color: var(--accent-primary);
+}
+
+.theme-paper .cta-primary,
+.theme-paper .cta-secondary {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--accent-secondary);
+}
+
+.theme-paper .cta-primary:hover,
+.theme-paper .cta-secondary:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--accent-secondary);
+}
+
+.theme-paper .contact-item {
+  border: 1px solid var(--border-color);
+  font-family: var(--font-mono);
+}
+
+.theme-paper .project-tag {
+  border: 1px solid var(--accent-primary);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.theme-paper .hero-avatar {
+  border: 3px solid var(--accent-primary);
+  box-shadow: 6px 6px 0 var(--border-color);
+}
+
+.theme-paper .footer-section {
+  font-family: var(--font-mono);
+  font-style: italic;
+}
+
+/* ============================================
+   BRUTALIST THEME - Raw Anti-Design
+   ============================================ */
+
+.theme-brutalist {
+  background: var(--bg-primary);
+}
+
+.theme-brutalist * {
+  border-radius: 0 !important;
+}
+
+.theme-brutalist .hero-name {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+.theme-brutalist .hero-title {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border-top: var(--border-width) solid var(--text-primary);
+  border-bottom: var(--border-width) solid var(--text-primary);
+  padding: 0.5rem 0;
+  display: inline-block;
+}
+
+.theme-brutalist .section-title,
+.theme-brutalist .section-heading {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 2rem;
+  border-bottom: var(--border-width) solid var(--text-primary);
+  padding-bottom: 0.25rem;
+}
+
+.theme-brutalist .project-card {
+  border: var(--border-width) solid var(--text-primary);
+  box-shadow: var(--brutalist-offset) var(--brutalist-offset) 0 var(--text-primary);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.theme-brutalist .project-card:hover {
+  transform: translate(calc(var(--brutalist-offset) * -0.5), calc(var(--brutalist-offset) * -0.5));
+  box-shadow: calc(var(--brutalist-offset) * 1.5) calc(var(--brutalist-offset) * 1.5) 0 var(--text-primary);
+}
+
+.theme-brutalist .highlight-item {
+  border: var(--border-width) solid var(--text-primary);
+  background: var(--bg-primary);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+}
+
+.theme-brutalist .cta-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: var(--border-width) solid var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  box-shadow: var(--brutalist-offset) var(--brutalist-offset) 0 var(--accent-primary);
+}
+
+.theme-brutalist .cta-primary:hover {
+  background: var(--accent-primary);
+  box-shadow: none;
+  transform: translate(var(--brutalist-offset), var(--brutalist-offset));
+}
+
+.theme-brutalist .cta-secondary {
+  background: transparent;
+  border: var(--border-width) solid var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.theme-brutalist .cta-secondary:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.theme-brutalist .contact-item {
+  border: var(--border-width) solid var(--text-primary);
+}
+
+.theme-brutalist .contact-item:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.theme-brutalist .contact-item:hover .contact-platform,
+.theme-brutalist .contact-item:hover .contact-label {
+  color: var(--bg-primary);
+}
+
+.theme-brutalist .project-tag {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  border: 1px solid var(--text-primary);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.theme-brutalist .hero-avatar {
+  border: var(--border-width) solid var(--text-primary);
+  box-shadow: var(--brutalist-offset) var(--brutalist-offset) 0 var(--text-primary);
+}
+
+.theme-brutalist .hero-avatar-placeholder {
+  border: var(--border-width) solid var(--text-primary);
+  background: var(--bg-secondary);
+  font-family: var(--font-display);
+  font-size: 4rem;
+}
+
+.theme-brutalist .export-btn {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border: var(--border-width) solid var(--text-primary);
+  text-transform: uppercase;
+  font-family: var(--font-display);
+}
+
+.theme-brutalist .footer-section {
+  border-top: var(--border-width) solid var(--text-primary);
+}
+
+.theme-brutalist input,
+.theme-brutalist textarea,
+.theme-brutalist select {
+  border: 2px solid var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.theme-brutalist input:focus,
+.theme-brutalist textarea:focus,
+.theme-brutalist select:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
