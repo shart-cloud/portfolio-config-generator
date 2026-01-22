@@ -2,7 +2,7 @@ import { PortfolioConfig } from './types';
 
 export const portfolioConfig: PortfolioConfig = {
   name: 'Alex jared gore ',
-  title: 'DevOps Engineer',
+  title: 'DevOps Cloud Engineer',
   tagline: 'Building reliable infrastructure and streamlining deployments',
   bio: [
     'DevOps engineer with 5+ years of experience in cloud infrastructure, CI/CD pipelines, and container orchestration.',
